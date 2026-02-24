@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love For Madhu ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins, Arial, sans-serif;
+  background:linear-gradient(135deg,#ff4e8a,#ff9a9e,#fad0c4);
+  background-size:400% 400%;
+  animation:bgMove 10s ease infinite;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff3366;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<!-- Music -->
+<audio id="bgMusic" src="D:\MADDY\madhu\maddy.mp3" loop autoplay muted></audio>
+<button onclick="toggleMusic()" style="position:fixed;top:10px;right:10px;z-index:999;">🎵 Music</button>
+
+<!-- Login Puzzle -->
+<section id="loginPage">
+<h1>Unlock 💖</h1>
+<p> Madhu  Puzzle Solvepannu, meala music button ah on panniko</p>
+<div id="puzzle" style="width:300px;height:300px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;"></div>
+<p id="status"></p>
+</section>
+
+<!-- Page 1 -->
+<section id="page1" style="display:none;">
+<h1>Hi Madhu ❤️</h1>
+<p>Enaku eapdi unta peasuradhu nu thereyala ,adha web ah create panni sollidalam
+   nu idha web ah unaku en kaiahla panna .....
+   Seri next page </p>
+<button onclick="nextPage(2)">Next</button>
+</section>
+
+<!-- Page 2 -->
+<section id="page2" style="display:none;">
+<h2> madhuu</h2>
+<p>Unaku eapdi nu thereyala but una enku rompah pudikum staring la konjam problem
+   vandhuchu apa avlotha iva inemea peasamata nu Rompah kasta pata but adha kadavul
+    ku dha thank sollanum ...... 
+    Seri next page va ...💕</p>
+<button onclick="nextPage(3)">Next</button>
+</section>
+
+<!-- Page 3 -->
+<section id="page3" style="display:none;">
+<h2>Madam😍</h2>
+<p>Na staring la irrudhu sollanum nu thonum ana solla mudiyalaa
+   eapdi sollama irrudha solli irrudha nadathu irrukum nu varuthama
+    irrukuradha vida solli try panna kasta pada theva ila la adha sollanum vandhuta.....
+    next page va ga madam ❤️</p>
+<button onclick="nextPage(4)">Next</button>
+</section>
+
+<!-- Page 4 -->
+<section id="page4" style="display:none;">
+<h2>Excess alagu 💘</h2>
+<p>eapdi solluradhu nu thereyala irrudhalum sollura (I) methi next page la sollura💖</p>
+<button onclick="nextPage(5)">Next</button>
+</section>
+
+<!-- Page 5 -->
+<section id="page5" style="display:none;">
+<h2>Promise 🤝</h2>
+<p>Oru china promise enala eapum unaku keta pearu varadhu ,
+   un freedom ah na thaduka matan maybe ne ok sonna (LOVE)
+    nampah relationship ah secret ah vachupan Seri next page va mah.....</p>
+<button onclick="nextPage(6)">Next</button>
+</section>
+
+<!-- Page 6 -->
+<section id="page6" style="display:none;">
+<h2>MADAM </h2>
+<p>Let us be together forever(you) full ah solla thereyala adha page oru word sollitan💍</p>
+<button onclick="nextPage(7)">Next</button>
+</section>
+
+<!-- Page 7 -->
+<section id="page7" style="display:none;">
+<h2>One Question 💌</h2>
+<p>I want to ask you…</p>
+<button onclick="nextPage(8)">Next</button>
+</section>
+
+<!-- Page 8 -->
+<section id="page8" style="display:none; position:relative;">
+<h1>Will You Be My Life Partner? 💍❤️</h1>
+<button onclick="sayYes()" style="position:absolute;left:60px;">Yes 💖</button>
+<button id="noBtn" onmouseover="moveNo()" style="position:absolute;right:60px;background:#555;">No 💔</button>
+</section>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+/************* SETTINGS *************/
+const SONG = "maddy.mp3";   // change song name
+const IMAGE = "madhuu.jpeg"; // change image name
+
+const PUBLIC_KEY = "";
+const SERVICE_ID = "YOUR_SERVICE_ID";
+const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+/***********************************/
+
+(function(){
+  emailjs.init(PUBLIC_KEY);
+})();
+
+/* Music */
+const music = document.getElementById("bgMusic");
+let isPlaying=false;
+
+window.addEventListener("load",()=>{
+  music.volume=0.7;
+  music.muted=false;
+  music.play().then(()=>{
+    isPlaying=true;
+  }).catch(()=>{
+    console.log("Autoplay blocked, click to play");
+  });
+});
+
+function toggleMusic(){
+  if(isPlaying){music.pause();isPlaying=false;}
+  else{music.play();isPlaying=true;}
+}
+
+/* Pages */
+function nextPage(n){
+  for(let i=1;i<=8;i++){
+    if(document.getElementById("page"+i)){
+      document.getElementById("page"+i).style.display="none";
+    }
+  }
+  document.getElementById("page"+n).style.display="flex";
+}
+
+/* Puzzle */
+const puzzle=document.getElementById("puzzle");
+const status=document.getElementById("status");
+let first=null;
+
+function initPuzzle(){
+  let arr=[0,1,2,3,4,5,6,7,8];
+  arr.sort(()=>Math.random()-0.5);
+
+  puzzle.innerHTML="";
+
+  arr.forEach(i=>{
+    const t=document.createElement("div");
+    t.style.backgroundImage=`url('${IMAGE}')`;
+    t.style.backgroundSize="300px 300px";
+    t.style.width="100%";
+    t.style.height="100%";
+    t.dataset.i=i;
+
+    const x=(i%3)*-100;
+    const y=Math.floor(i/3)*-100;
+    t.style.backgroundPosition=x+"px "+y+"px";
+
+    t.onclick=()=>swap(t);
+    puzzle.appendChild(t);
+  });
+}
+
+function swap(t){
+  if(!first){
+    first=t;
+    t.style.outline="3px solid red";
+  }else{
+    let p1=first.style.backgroundPosition;
+    let i1=first.dataset.i;
+
+    first.style.backgroundPosition=t.style.backgroundPosition;
+    first.dataset.i=t.dataset.i;
+
+    t.style.backgroundPosition=p1;
+    t.dataset.i=i1;
+
+    first.style.outline="none";
+    first=null;
+    checkWin();
+  }
+}
+
+function checkWin(){
+  let win=true;
+  [...puzzle.children].forEach((t,i)=>{
+    if(parseInt(t.dataset.i)!==i) win=false;
+  });
+
+  if(win){
+    status.innerHTML="Unlocked 💖";
+    setTimeout(()=>{
+      document.getElementById("loginPage").style.display="none";
+      nextPage(1);
+    },1000);
+  }
+}
+
+initPuzzle();
+
+/* Proposal */
+function sayYes(){
+  emailjs.send(SERVICE_ID,TEMPLATE_ID,{
+    from_name:"Madhu 💖",
+    message:"She said YES 😍💍"
+  }).then(()=>{
+    alert("She said YES ❤️ Mail Sent 😍📩");
+  },()=>{
+    alert("Mail Failed ❌");
+  });
+}
+
+function moveNo(){
+  const b=document.getElementById("noBtn");
+  b.style.left=Math.random()*200+"px";
+  b.style.top=Math.random()*100+"px";
+}
+
+/* Hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
